@@ -1,4 +1,18 @@
+import * as crud from './crud.js';
+
 const clock = new Date();
+const notesTextBox = document.getElementById('notes-textbox');
+const saveNotesButton = document.getElementById('save-notes-button');
+const tasksTextBox = document.getElementById('tasks-textbox');
+const saveTasksButton = document.getElementById('save-tasks-button');
+
+saveNotesButton.addEventListener('click', async function(e) {
+  const note = {
+    date: clock.toLocaleDateString('en-US'),
+    content: notesTextBox.value,
+  };
+  await crud.createNote(note);
+});
 
 function renderTime(element) {
   element.innerHTML = '';
@@ -15,14 +29,6 @@ function renderDate(element) {
 }
 
 function renderWeather(element) {
-
-}
-
-function renderTasks(element) {
-  
-}
-
-function renderNotes(element) {
 
 }
 
