@@ -43,7 +43,7 @@ body {
   width: 400px;
   height: 200px;
   padding: 2ch;
-  margin-top: 1ch;
+  margin: 1ch;
   box-shadow: none;
   border-style: dashed;
   border-width: 1px;
@@ -59,7 +59,7 @@ body {
   vertical-align: top;
 }
 
-.pomodoro-button {
+.button {
   align-items: center;
   background-color: #5a6b81;
   border-radius: 24px;
@@ -69,23 +69,31 @@ body {
   cursor: pointer;
   display: inline-flex;
   font-family: "JetBrains Mono",monospace;
-  height: 48px;
-  justify-content: center;
+  height: 36px;
+  font-size: 14px;
   line-height: 1;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 12px;
+  padding-right: 12px;
   position: relative;
   text-align: center;
   touch-action: manipulation;
   white-space: nowrap;
   will-change: transform;
-  font-size: 18px;
+  
 }
 
-.pomodoro-button:hover {
+.button:hover {
   transform: translateY(-2px);
 }
 
-.pomodoro-button:active {
+.button:active {
   transform: translateY(2px);
+}
+
+#pomodoro-button {
+  height: 48px;
+  font-size: 18px;
+  line-height: 1;
+  padding-left: 16px;
+  padding-right: 16px;
 }
