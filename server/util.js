@@ -1,46 +1,31 @@
 // Notes
-async function createNote(res, date, content) {
+export async function createNote(res, date, content) {
   // TODO: insert new entry to collection
   let noteEntry = {
     date: date,
     content: content
   };
   console.log(noteEntry);
-/*
-  if (date === undefined) {
-    res.status(400).send("Error, note not saved.");
-  } else {
-    res.status(200).send("Note saved successfully.");
-  }
-  */
-  
 }
 
-function readNote() {
-  return {};
+function updateNote(date, content) {
+  // Query db for note with that date, err if it exists
 }
 
-function dumpNotes() {
-  return {};
-}
 
-function deleteNote() {
-  return {};
+function deleteNote(date) {
+
 }
 
 // Tasks 
-function createTasks() {
+function createTasks(date, content) {
   return {};
 }
 
-function readTasks() {
+function updateTasks(date, content) {
   return {};
 }
 
-function dumpTasks() {
-  return {};
-}
-
-function deleteTasks() {
+function deleteTasks(date) {
   return {};
 }

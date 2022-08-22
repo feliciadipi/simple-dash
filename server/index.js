@@ -13,8 +13,8 @@ app.use('/client', express.static('client'));
 
 
 app.post('/note/create', async function (req, res) {
-  const body = JSON.parse(req.body);
-  await util.createNote(res, body.date, body.content);
+  console.log(req.body);
+  await util.createNote(res, req.body.date, req.body.content);
 });
 
 app.listen(port, () => {
