@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Dashboard</title>
+  <script type="module" src="main.js" defer></script>
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+  <div class="page-container" id="page-container">
+
+    <div class="section">
+      <div class="notes-container">
+        <label for="notes-textbox">Notes</label>
+        <br>
+        <textarea type="text" class="textbox" id="notes-textbox"></textarea>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="time-container" id="time-container"></div>
+      <div class="date-container" id="date-container"></div>
+      <button type="button" class="pomodoro-button">Pomodoro</button>
+    </div>
+
+    <div class="section">
+      <div class="tasks-container">
+        <label for="tasks-textbox">Tasks</label>
+        <br>
+        <textarea type="text" class="textbox" id="tasks-textbox"></textarea>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
