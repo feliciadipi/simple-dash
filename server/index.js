@@ -13,14 +13,30 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use('/client', express.static('client'));
 
-app.post('/notes/save', async function (req, res) {
+app.post('/notes/save', async function(req, res) {
   try {
     await client.connect();
     const collection = await client.db('onelinerDB').collection('notes');
     console.log("Connected to: " + collection.namespace);
-    await util.saveNote(req, res, collection);
+    await util.saveEntry(req.body.date, req.body.content, collection);
+    res.status(200).send("Successfully saved note");
   } catch (e) {
     console.error(e);
+    res.status(500).send("Error saving note");
+  }
+  await client.close();
+});
+
+app.post('/notes/delete', async function(req, res) {
+  try {
+    await client.connect();
+    const collection = await client.db('onelinerDB').collection('notes');
+    console.log("Connected to: " + collection.namespace);
+    await util.deleteEntry(req.body.date, collection);
+    res.status(200).send("Successfully deleted note");
+  } catch (e) {
+    console.error(e);
+    res.status(500).send("Error deleting note");
   }
   await client.close();
 });

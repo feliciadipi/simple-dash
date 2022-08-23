@@ -1,18 +1,25 @@
-export async function saveEntry(req, res, collection) {
+export async function saveEntry(date, content, collection) {
   // create new document
   let newEntry = {
-    date: req.body.date,
-    content: req.body.content
+    date: date,
+    content: content
   }
-  // query the collection for an existing document at current date (catch and log promise error)
-  let curEntry = await collection.findOne({'date': req.body.date}).catch(err => console.log(err));
 
-  if (curEntry === null) {
+  // query the collection for an existing document at current date (catch and log promise error)
+  if (await entryExists(date, collection)) {
     // no entry found, create new document
     await createEntry(newEntry, collection);
   } else { 
     // entry found, update document with new data
-    await updateEntry(req.body.date, newEntry, collection);
+    await updateEntry(date, newEntry, collection);
+  }
+}
+
+export async function deleteEntry(date, collection) {
+  if (entryExists(date, collection)) {
+    await collection.deleteOne({'date': date}).catch(err => console.log(err));
+  } else {
+    console.log('Deletion error, entry does not exist');
   }
 }
 
@@ -26,6 +33,7 @@ async function updateEntry(date, newEntry, collection) {
   await collection.updateOne({'date': date}, newEntry).catch(err => console.log(err));
 }
 
-export async function deleteEntry(date, collection) {
-  await collection.deleteOne({'date': date}).catch(err => console.log(err));
+async function entryExists(date, collection) {
+  let curEntry = await collection.findOne({'date': date}).catch(err => console.log(err));
+  return (curEntry === null);
 }
