@@ -1,11 +1,10 @@
 export async function save(state) {
-  const response = await fetch(`/notes/save`, {
+  const response = await fetch(`/save`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ date: notes.date, content: notes.content }),
+    body: JSON.stringify(state),
   });
   const data = await response.json();
-  return data;
 }
