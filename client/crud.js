@@ -1,5 +1,5 @@
-export async function createNote(note) {
-  const response = await fetch(`/note/create`, {
+export async function saveNote(note) {
+  const response = await fetch(`/notes/save`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

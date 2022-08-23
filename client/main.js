@@ -11,7 +11,7 @@ saveNotesButton.addEventListener('click', async function(e) {
     date: clock.toLocaleDateString('en-US'),
     content: notesTextBox.value,
   };
-  await crud.createNote(note);
+  await crud.saveNote(note);
 });
 
 function renderTime(element) {
