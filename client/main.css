@@ -6,8 +6,9 @@ body {
 }
 
 .page-container {
-  margin: 10%;
+  margin: 5%;
   display: grid;
+  grid-template-rows: repeat(2, auto);
   grid-template-columns: repeat(3, auto);
 }
 
@@ -16,11 +17,27 @@ body {
   flex-direction: column;
   text-align: center;
   align-items: center;
-  justify-items: space-evenly;
 }
 
-.notes-container {
-  margin-top: 20%;
+.weather-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: left;
+}
+
+.pomodoro-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+.account-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: right;
 }
 
 .tasks-container {
@@ -28,7 +45,7 @@ body {
 }
 
 .time-container {
-  margin-top: 30%;
+  margin-top: 40%;
   margin-bottom: 0;
   font-size: 72px;
 }
@@ -37,6 +54,10 @@ body {
   margin-top: 0;
   margin-bottom: 10%;
   font-size: 36px;
+}
+
+.notes-container {
+  margin-top: 20%;
 }
 
 .textbox {
@@ -70,7 +91,7 @@ body {
   display: inline-flex;
   font-family: "JetBrains Mono",monospace;
   height: 36px;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1;
   padding-left: 12px;
   padding-right: 12px;
@@ -88,12 +109,4 @@ body {
 
 .button:active {
   transform: translateY(2px);
-}
-
-#pomodoro-button {
-  height: 48px;
-  font-size: 18px;
-  line-height: 1;
-  padding-left: 16px;
-  padding-right: 16px;
 }
