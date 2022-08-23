@@ -1,4 +1,4 @@
-import * as crud from './crud.js';
+import * as fetch from './fetch.js';
 
 const clock = new Date();
 const notesTextBox = document.getElementById('notes-textbox');
