@@ -1,4 +1,4 @@
-export async function saveEntry(date, content, collection) {
+export async function saveEntry(state, collection) {
   // create new document
   let newEntry = {
     date: date,
