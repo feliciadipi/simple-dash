@@ -7,7 +7,9 @@ export class Theme {
   let transitions = {
     'charcoal': 'bingsu',
     'bingsu': 'blueberry',
-    'blueberry': 'charcoal'
+    'blueberry': 'alpine',
+    'alpine': 'botanical',
+    'botanical': 'charcoal'
   };
 
   this.getTheme = () =>  {

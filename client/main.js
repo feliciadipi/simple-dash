@@ -20,16 +20,13 @@ const textBoxes = Array.from(document.getElementsByClassName('textbox'));
 const state = new State();
 const theme = new Theme();
 
-themeButton.addEventListener('click', changeTheme);
+/* ------------------------------------------------------ */
 
-saveButton.addEventListener('click', async function(e) {
-  if (!state.authenticated()) {
-    window.alert('Please log in to save your notes!')
-  } else {
-    const responseBody = await fetches.save(state);
-    window.alert(JSON.stringify(responseBody));
-  }
-});
+function initTheme() {
+  body.classList.add(theme.getTheme());
+  buttons.forEach(e => e.classList.add(theme.getTheme()));
+  textBoxes.forEach(e => e.classList.add(theme.getTheme()));
+}
 
 function changeTheme() {
   const oldTheme = theme.getTheme();
@@ -44,5 +41,21 @@ function renderPage() {
   render.renderDate(dateContainer);
 }
 
+/* ------------------------------------------------------ */
+
+saveButton.addEventListener('click', async function(e) {
+  if (!state.authenticated()) {
+    window.alert('Please log in to save your notes!')
+  } else {
+    const responseBody = await fetches.save(state);
+    window.alert(JSON.stringify(responseBody));
+  }
+});
+
+themeButton.addEventListener('click', changeTheme);
+
+/* ------------------------------------------------------ */
+
+initTheme();
 renderPage();
 setInterval(renderPage, 1000);
