@@ -18,9 +18,3 @@ export function renderDate(element) {
   display.innerHTML = clock.toLocaleDateString('en-US');
   element.appendChild(display);
 }
-
-export function renderWeather(element) {
-  const weather = document.createElement('div');
-  weather.innerHTML = '87ºF | Partly Cloudy';
-  element.appendChild(weather);
-}
