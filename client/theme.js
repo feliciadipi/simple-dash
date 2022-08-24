@@ -1,7 +1,9 @@
 // Finite state machine to handle themes
-class Theme {
+export class Theme {
  constructor() {
+
   let currentTheme = 'blueberry';
+  
   let transitions = {
     'dark': 'light',
     'light': 'blueberry',
@@ -18,5 +20,3 @@ class Theme {
   }
  }
 }
-
-export default new Theme();

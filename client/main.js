@@ -1,3 +1,4 @@
+import { State } from './state.js';
 import * as fetch from './fetch.js';
 import * as render from './render.js';
 
@@ -12,9 +13,13 @@ const tasksTextBox = document.getElementById('tasks-textbox');
 const timeContainer = document.getElementById('time-container');
 const dateContainer = document.getElementById('date-container');
 
-themeButton.addEventListener('click', async function(e) {
-  await fetch.changeTheme(user);
-});
+// Create new instance of state class
+const state = new State();
+
+// Restore theme from local storage if it exists
+
+// Cannot save tasks or notes until you are logged in
+
 
 saveButton.addEventListener('click', async function(e) {
   const state = {
@@ -24,6 +29,8 @@ saveButton.addEventListener('click', async function(e) {
   };
   await fetch.save(state);
 });
+
+
 
 function renderPage() {
   render.renderTime(timeContainer);
