@@ -3,6 +3,9 @@ import * as fetches from './fetches.js';
 import * as render from './render.js';
 import { Theme } from './theme.js';
 
+const ls = window.localStorage;
+const body = document.getElementById('body');
+const pageContainer = document.getElementById('page-container');
 const themeButton = document.getElementById('theme-button');
 const authContainer = document.getElementById('auth-container');
 const loginButton = document.getElementById('login-button');
@@ -12,17 +15,24 @@ const notesTextBox = document.getElementById('notes-textbox');
 const tasksTextBox = document.getElementById('tasks-textbox');
 const timeContainer = document.getElementById('time-container');
 const dateContainer = document.getElementById('date-container');
+const buttons = Array.from(document.getElementsByClassName('button'));
+const textBoxes = Array.from(document.getElementsByClassName('textbox'));
 
-// Create new instances of state and theme classes
 const state = new State();
-const theme = new Theme();
+const theme = (ls.getItem('theme') === null) ? new Theme() : ls.getItem('theme');
+body.classList.add(theme.getTheme());
+buttons.forEach(e => e.classList.add(theme.getTheme()));
+textBoxes.forEach(e => e.classList.add(theme.getTheme()));
 
-// Restore theme from local storage if it exists
-if (window.localStorage.getItem('theme') !== null) {
-  theme = window.localStorage.getItem('theme');
-}
+themeButton.addEventListener('click', function() {
+  const oldTheme = theme.getTheme();
+  const newTheme = theme.changeTheme().getTheme();
+  body.classList.replace(oldTheme, newTheme);
+  buttons.forEach(e => e.classList.replace(oldTheme, newTheme));
+  textBoxes.forEach(e => e.classList.replace(oldTheme, newTheme));
+});
 
-// Cannot save tasks or notes until you are logged in
+
 saveButton.addEventListener('click', async function(e) {
   if (!state.authenticated()) {
     window.alert('Please log in to save your notes!')
@@ -33,6 +43,7 @@ saveButton.addEventListener('click', async function(e) {
 });
 
 function renderPage() {
+
   render.renderTime(timeContainer);
   render.renderDate(dateContainer);
 }

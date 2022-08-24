@@ -1,25 +1,25 @@
 body {
   font-family: "JetBrains Mono", monospace;
-  font-size: 18px;
+  font-size: 24px;
 }
 
-.light {
-  background-color: #6B7A8F;
-  color: #FFFF;
-}
-
-.dark {
-  background-color: #212121;
-  color: #424242;
+.charcoal {
+  background-color: #313231;
+  color: #F7F5F1;
 }
 
 .blueberry {
   background-color: #6B7A8F;
-  color: #FFFF;
+  color: #b7c5d8;
+}
+
+.bingsu {
+  background-color: #B8A7AA;
+  color: #48373D;
 }
 
 .page-container {
-  margin: 5%;
+  margin: 1%;
   display: grid;
   grid-template-rows: repeat(2, auto);
   grid-template-columns: repeat(3, auto);
@@ -45,23 +45,23 @@ body {
 }
 
 .tasks-container {
-  margin-top: 20%;
+  margin-top: 40%;
 }
 
 .time-container {
-  margin-top: 40%;
+  margin-top: 50%;
   margin-bottom: 0;
   font-size: 72px;
 }
 
 .date-container {
   margin-top: 0;
-  margin-bottom: 10%;
+  margin-bottom: 20%;
   font-size: 36px;
 }
 
 .notes-container {
-  margin-top: 20%;
+  margin-top: 40%;
 }
 
 .textbox {
@@ -70,29 +70,29 @@ body {
   padding: 2ch;
   margin: 1ch;
   box-shadow: none;
-  border-width: 0px;
+  border-width: 1px;
+  border-style: dashed;
+  border-color: #ffff;
   border-radius: 1%;
   text-align: top;
   text-justify: top;
-  font-size: large;
-  font-family: 'Courier New', Courier, monospace;
   text-align: left;
   vertical-align: top;
 }
 
 .button {
-  margin: 2px;
+  margin: 10px;
   align-items: center;
-  background-color: #5a6b81;
+  border-style: dashed;
   border-radius: 24px;
-  border-width: 0;
+  border-width: 1px;
   box-sizing: border-box;
-  color: #d0d8e3;
   cursor: pointer;
   display: inline-flex;
-  font-family: "JetBrains Mono", monospace;
   height: 36px;
   font-size: 18px;
+  font-family: "JetBrains Mono", monospace;
+  border-color: #ffff;
   line-height: 1;
   padding-left: 14px;
   padding-right: 14px;
@@ -101,7 +101,6 @@ body {
   touch-action: manipulation;
   white-space: nowrap;
   will-change: transform;
-  
 }
 
 .button:hover {

@@ -2,12 +2,12 @@
 export class Theme {
  constructor() {
 
-  let currentTheme = 'blueberry';
+  let currentTheme = 'charcoal';
   
   let transitions = {
-    'dark': 'light',
-    'light': 'blueberry',
-    'blueberry': 'dark'
+    'charcoal': 'bingsu',
+    'bingsu': 'blueberry',
+    'blueberry': 'charcoal'
   };
 
   this.getTheme = () =>  {
