@@ -21,8 +21,8 @@ saveButton.addEventListener('click', async function(e) {
 function renderPage() {
   render.renderTime(timeContainer);
   render.renderDate(dateContainer);
-  render.renderWeather(weatherContainer);
+ //render.renderWeather(weatherContainer);
 }
 
-// Render every 10s
-setInterval(renderPage, 10000);
+renderPage();
+setInterval(renderPage, 1000);

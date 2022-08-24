@@ -4,7 +4,7 @@ import express from 'express';
 import logger from 'morgan';
 import { MongoClient } from 'mongodb';
 
-const client = new MongoClient(process.env.MONG_URI, { useUnifiedTopology: true });
+const client = new MongoClient(process.env.MONGO_URI, { useUnifiedTopology: true });
 const port = process.env.PORT || 3000;
 const app = express();
 
