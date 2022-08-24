@@ -3,7 +3,6 @@ import * as fetches from './fetches.js';
 import * as render from './render.js';
 import { Theme } from './theme.js';
 
-const ls = window.localStorage;
 const body = document.getElementById('body');
 const pageContainer = document.getElementById('page-container');
 const themeButton = document.getElementById('theme-button');
@@ -19,19 +18,9 @@ const buttons = Array.from(document.getElementsByClassName('button'));
 const textBoxes = Array.from(document.getElementsByClassName('textbox'));
 
 const state = new State();
-const theme = (ls.getItem('theme') === null) ? new Theme() : ls.getItem('theme');
-body.classList.add(theme.getTheme());
-buttons.forEach(e => e.classList.add(theme.getTheme()));
-textBoxes.forEach(e => e.classList.add(theme.getTheme()));
+const theme = new Theme();
 
-themeButton.addEventListener('click', function() {
-  const oldTheme = theme.getTheme();
-  const newTheme = theme.changeTheme().getTheme();
-  body.classList.replace(oldTheme, newTheme);
-  buttons.forEach(e => e.classList.replace(oldTheme, newTheme));
-  textBoxes.forEach(e => e.classList.replace(oldTheme, newTheme));
-});
-
+themeButton.addEventListener('click', changeTheme);
 
 saveButton.addEventListener('click', async function(e) {
   if (!state.authenticated()) {
@@ -42,8 +31,15 @@ saveButton.addEventListener('click', async function(e) {
   }
 });
 
-function renderPage() {
+function changeTheme() {
+  const oldTheme = theme.getTheme();
+  const newTheme = theme.changeTheme().getTheme();
+  body.classList.replace(oldTheme, newTheme);
+  buttons.forEach(e => e.classList.replace(oldTheme, newTheme));
+  textBoxes.forEach(e => e.classList.replace(oldTheme, newTheme));
+}
 
+function renderPage() {
   render.renderTime(timeContainer);
   render.renderDate(dateContainer);
 }
