@@ -1,8 +1,21 @@
 body {
-  background-color: #6B7A8F;
-  color: #FFFF;
   font-family: "JetBrains Mono", monospace;
   font-size: 18px;
+}
+
+.light {
+  background-color: #6B7A8F;
+  color: #FFFF;
+}
+
+.dark {
+  background-color: #212121;
+  color: #424242;
+}
+
+.blueberry {
+  background-color: #6B7A8F;
+  color: #FFFF;
 }
 
 .page-container {
@@ -27,7 +40,7 @@ body {
   text-align: center;
 }
 
-.account-container {
+.auth-container {
   text-align: end;
 }
 
@@ -57,12 +70,8 @@ body {
   padding: 2ch;
   margin: 1ch;
   box-shadow: none;
-  border-style: dashed;
-  border-width: 1px;
+  border-width: 0px;
   border-radius: 1%;
-  background-color: #6B7A8F;
-  border-color: #bbc5d2;
-  color: #d0d8e3;
   text-align: top;
   text-justify: top;
   font-size: large;

@@ -1,29 +1,23 @@
 import 'dotenv/config';
-import * as util from './util.js';
 import express from 'express';
-import logger from 'morgan';
-import { MongoClient } from 'mongodb';
 import expressSession from 'express-session';
+import logger from 'morgan';
 import users from './users.js';
 import auth from './auth.js';
+import * as rest from './rest.js';
+import * as mongo from './mongo.js';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
-// We will use __dirname later on to send files back to the client.
+const app = express();
+const port = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(dirname(__filename));
-
-// Session configuration
 const sessionConfig = {
-  // set this encryption key in Heroku config (never in GitHub)!
   secret: process.env.SECRET || 'SECRET',
   resave: false,
   saveUninitialized: false,
 };
-
-const client = new MongoClient(process.env.MONGO_URI, { useUnifiedTopology: true });
-const port = process.env.PORT || 3000;
-const app = express();
 
 // Use Morgan logger
 app.use(logger('dev'));
@@ -38,30 +32,46 @@ app.use(express.urlencoded({ extended: true }));
 // Configure our authentication strategy
 auth.configure(app);
 
-
 // Our own middleware to check if the user is authenticated
 function checkLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     // If we are authenticated, run the next route.
     next();
   } else {
-    // Otherwise, redirect to the login page.
-    res.redirect('/login');
+    // Otherwise, yell at the user.
+    res.status(401).send('Hey! You must be logged in to do that! 🤬');
   }
-}
+} 
 
-app.post('/save', async function(req, res) {
+app.post('/register', async function(req, res) {
+});
+
+app.post('/login', async function(req, res) {
+});
+
+app.post('/update/user', async function(req, res) {
+});
+
+app.post('/delete/user', async function(req, res) {
+});
+
+app.post('/save/state', async function(req, res) {
   try {
-    await client.connect();
-    const users = await client.db('onelinerDB').collection('users');
-    console.log("Successfully connected to: " + collection.namespace);
-    await util.saveEntry(req.body.state, users);
-    res.status(200).send("Successfully saved data");
+    const client = await mongo.connect();
+    const states = await mongo.getCollection(client, 'onelinerDB', 'states');
+    console.log("Connected..."); // A little checkpoint
+    await rest.saveState(req.body, states);
+    await client.close;
+    res.status(200).send('Success');
   } catch (e) {
-    console.error(e);
-    res.status(500).send("Error saving data");
+    res.status(500).send(e);
   }
-  await client.close();
+});
+
+app.post('/update/state', async function(req, res) {
+});
+
+app.post('/delete/state', async function(req, res) {
 });
 
 app.listen(port, () => {

@@ -1,5 +1,3 @@
-import { Theme } from './theme.js';
-
 // Implemented with fluent design pattern for convenience
 export class State {
   constructor() {
