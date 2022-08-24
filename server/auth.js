@@ -11,14 +11,14 @@ const { Strategy } = passportLocal;
 const strategy = new Strategy(async (username, password, done) => {
   if (!users.findUser(username)) {
     // no such user
-    return done(null, false, { message: 'Wrong username' });
+    return done(null, false, { message: 'User does not exist' });
   }
   if (!users.validatePassword(username, password)) {
     // invalid password
     // should disable logins after N messages
     // delay return to rate-limit brute-force attacks
     await new Promise((r) => setTimeout(r, 2000)); // two second delay
-    return done(null, false, { message: 'Wrong password' });
+    return done(null, false, { message: 'Incorect password' });
   }
   // success!
   // should create a user object here, associated with a unique identifier
