@@ -1,33 +1,29 @@
-// Implemented with fluent design pattern for convenience
-export class State {
+/**
+ * Database/client-side CRUD operations should happen here
+ * If there is a user still in browser local storage restore it
+ * Otherwise, user needs to authenticate
+ * Until authenticated, none of this will get saved
+ * Button behavior will need to depend on whether the user is authenticated or not,
+ * All methods should only save the settings if the user is logged in
+ * Once a user logs in, we put their user ID in state.user
+ * Then we use that userID to query the database whenever there is a crud operation
+ */
+
+class State {
   constructor() {
-    let user = undefined;
-    let tasks = '';
-    let notes = '';
+    this.auth = false;
+    this.user = undefined;
+  }
 
-    this.authenticated = () => {
-      return user !== undefined;
-    }
-
-    this.getUser = () => { return user; }
-
-    this.setUser = (updated) => { 
-      user = updated;
-      return this;
-    }
-
-    this.getTasks = () => { return tasks; }
-
-    this.setTasks = (updated) => {
-      tasks = updated;
-      return this;
-    }
-
-    this.getNotes = () => { return notes; }
-
-    this.setNotes = (updated) => {
-      notes = updated;
-      return this;
+  authenticated() {
+    return this.auth;
+  }
+  
+  getUserID() {
+    if (this.auth) {
+      return this.user.getID();
+    } else {
+      return 'Guest';
     }
   }
 }

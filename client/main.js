@@ -1,6 +1,6 @@
-import { State } from './state.js';
-import * as fetches from './fetches.js';
+import bootstrap from 'bootstrap' 
 import * as render from './render.js';
+import { State } from './state.js';
 import { Theme } from './theme.js';
 
 const body = document.getElementById('body');
@@ -17,8 +17,8 @@ const dateContainer = document.getElementById('date-container');
 const buttons = Array.from(document.getElementsByClassName('button'));
 const textBoxes = Array.from(document.getElementsByClassName('textbox'));
 
-const state = new State();
 const theme = new Theme();
+const state = new State();
 
 /* ------------------------------------------------------ */
 
