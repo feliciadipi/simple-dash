@@ -9,7 +9,7 @@
  * Then we use that userID to query the database whenever there is a crud operation
  */
 
-class State {
+export class State {
   constructor() {
     this.auth = false;
     this.user = undefined;
