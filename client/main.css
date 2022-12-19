@@ -1,5 +1,18 @@
-body {
+#body {
   font-family: "JetBrains Mono", monospace;
+  font-size: 18px;
+}
+
+#time {
+  font-size: 60px;
+  padding-top: 10%;
+  justify-content: end;
+}
+
+#date {
+  font-size: 24px;
+  padding-bottom: 10%;
+  justify-content: start;
 }
 
 .charcoal {
@@ -34,11 +47,8 @@ body {
   border-radius: 24px;
   border-width: 1px;
   box-sizing: border-box;
-  cursor: pointer;
   display: inline-flex;
   height: 36px;
-  font-size: 18px;
-  font-family: "JetBrains Mono", monospace;
   border-color: #ffff;
   line-height: 1;
   padding-left: 14px;
@@ -48,10 +58,6 @@ body {
   touch-action: manipulation;
   white-space: nowrap;
   will-change: transform;
-}
-
-.btn:hover {
-  transform: translateY(-2px);
 }
 
 .btn:active {
