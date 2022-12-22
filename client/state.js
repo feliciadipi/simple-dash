@@ -1,33 +1,26 @@
-// Implemented with fluent design pattern for convenience
 export class State {
   constructor() {
-    let user = undefined;
-    let tasks = '';
-    let notes = '';
+    this.user = undefined;
+    this.theme = 'charcoal';
+    this.use24h = false;
+    this.useMMDDYY = false;
+  }
 
-    this.authenticated = () => {
-      return user !== undefined;
-    }
+  authenticated() {
+    return (this.user !== undefined);
+  }
 
-    this.getUser = () => { return user; }
+  get(prop) {
+    return this[prop];
+  }
 
-    this.setUser = (updated) => { 
-      user = updated;
-      return this;
-    }
+  set(prop, val) {
+    this[prop] = val;
+    return this[prop];
+  }
 
-    this.getTasks = () => { return tasks; }
-
-    this.setTasks = (updated) => {
-      tasks = updated;
-      return this;
-    }
-
-    this.getNotes = () => { return notes; }
-
-    this.setNotes = (updated) => {
-      notes = updated;
-      return this;
-    }
+  toggle(prop) {
+    this[prop] = !this[prop];
+    return this[prop];
   }
 }

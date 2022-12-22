@@ -1,4 +1,4 @@
-export function refreshClock() {
+function refreshClock() {
   const clock = new Date();
   return clock;
 }
