@@ -2,78 +2,118 @@ import 'dotenv/config';
 import express from 'express';
 import expressSession from 'express-session';
 import logger from 'morgan';
-import users from './users.js';
+import database from './database.js';
 import auth from './auth.js';
-import * as rest from './rest.js';
-import * as mongo from './mongo.js';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
 const app = express();
 const port = process.env.PORT || 3000;
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(dirname(__filename));
 const sessionConfig = {
   secret: process.env.SECRET || 'SECRET',
   resave: false,
   saveUninitialized: false,
 };
 
-// Use Morgan logger
 app.use(logger('dev'));
-// Allow static file serving
-app.use('/client', express.static('client'));
-// Setup the session middleware
 app.use(expressSession(sessionConfig));
-// Allow JSON inputs
 app.use(express.json());
-// Allow URLencoded data
 app.use(express.urlencoded({ extended: true }));
-// Configure our authentication strategy
 auth.configure(app);
 
-// Our own middleware to check if the user is authenticated
-function checkLoggedIn(req, res, next) {
+/**
+ * Verify that user is authenticated.
+ */
+function verify(req, res, next) {
   if (req.isAuthenticated()) {
-    // If we are authenticated, run the next route.
     next();
   } else {
-    // Otherwise, yell at the user.
-    res.status(401).send('Hey! You must be logged in to do that! 🤬');
+    res.redirect('/');
   }
-} 
+}
 
+/**
+ * Log user in with passport.
+ */
+app.post('/login', auth.authenticate('local', {
+  successRedirect: '/load',
+  failureRedirect: '/',
+}));
+
+/**
+ * Create new user entry in database.
+ */
 app.post('/register', async function(req, res) {
-});
-
-app.post('/login', async function(req, res) {
-});
-
-app.post('/update/user', async function(req, res) {
-});
-
-app.post('/delete/user', async function(req, res) {
-});
-
-app.post('/save/state', async function(req, res) {
+  const { user, pass, config } = req.body;
   try {
-    const client = await mongo.connect();
-    const states = await mongo.getCollection(client, 'onelinerDB', 'states');
-    console.log("Connected..."); // A little checkpoint
-    await rest.saveState(req.body, states);
-    await client.close;
-    res.status(200).send('Success');
-  } catch (e) {
+    await database.createUser(user, pass, config);
+    res.sendStatus(200);
+  } catch(e) {
     res.status(500).send(e);
   }
 });
 
-app.post('/update/state', async function(req, res) {
+/**
+ * Retrieve user settings/notes from database.
+ * Required authentication.
+ */
+app.get('/load', verify, async function(req, res) {
+  const { user } = req.body;
+  try {
+    const data = await database.getUser(user);
+    res.status(200).json(data);
+  } catch(e) {
+    res.status(500).send(e);
+  }
 });
 
-app.post('/delete/state', async function(req, res) {
+/**
+ * Save user settings/notes to database.
+ * Required authentication.
+ */
+app.post('/save', verify, async function(req, res) {
+  const { user, config } = req.body;
+  try {
+    await database.saveState(user, config);
+    res.sendStatus(200);
+  } catch(e) {
+    res.status(500).send(e);
+  }
 });
 
+/**
+ * Delete user settings/notes from database.
+ * Required authentication.
+ */
+app.post('/delete', verify, async function(req, res) {
+  const { user } = req.body;
+  try {
+    await database.deleteUser(user);
+  } catch(e) {
+    res.status(500).send(e);
+  }
+});
+
+/**
+ * Log the user out. Redirect to homepage.
+ * TODO reset html elements on client side.
+ */
+app.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
+
+app.post('/clear', async (req, res) => {
+  try {
+    await database.clear();
+    res.sendStatus(200);
+  } catch(e) {
+    res.status(500).send(e);
+  }
+});
+
+
+/**
+ * Open server on ${port}.
+ */
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
 });
