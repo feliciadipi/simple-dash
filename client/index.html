@@ -15,45 +15,51 @@
 
 <body id="body" class="themed">
   <div class="container">
+    <!--Header Row-->
     <div class="row align-items-center">
+      <!--Settings Menu-->
       <div class="col-2 text-start">
-        <button class="btn themed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
-          aria-expanded="false" aria-controls="collapseExample">
-          settings ↓
-        </button>
-        <div class="collapse" id="collapseExample">
-          <ul class="list-group-flush">
-            <li class="list-group-item">
-              <button class="btn themed" type="button">time format</button>
-            </li>
-            <li class="list-group-item">
-              <button class="btn themed" type="button">date format</button>
-            </li>
-            <li class="list-group-item">
-              <div class="dropdown">
-                <button class="btn themed" type="button" data-bs-toggle="dropdown" aria-expanded="false">theme</button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#" class="btn" id="charcoal">charcoal</a></li>
-                  <li><a class="dropdown-item" href="#" class="btn" id="bingsu">bingsu</a></li>
-                  <li><a class="dropdown-item" href="#" class="btn" id="blueberry">blueberry</a></li>
-                  <li><a class="dropdown-item" href="#" class="btn" id="alpine">alpine</a></li>
-                  <li><a class="dropdown-item" href="#" class="btn" id="botanical">botanical</a></li>
-                </ul>
-              </div>
+        <div class="dropdown" id="settings">
+        <button class="btn themed" type="button" data-bs-toggle="dropdown" data-bs-target="#settings"
+          aria-expanded="false" aria-controls="settings">settings ↓</button>
+          <ul class="dropdown-menu themed">
+            <li><a class="dropdown-item themed" href="#">time format</a></li>
+            <li><a class="dropdown-item themed" href="#">date format</a></li>
+            <li>
+              <a class="dropdown-item themed" href="#">theme</a>
+              <ul class="submenu dropdown-menu themed">
+                <li><a class="dropdown-item themed" href="#" id="charcoal">charcoal</a></li>
+                <li><a class="dropdown-item themed" href="#" id="bingsu">bingsu</a></li>
+                <li><a class="dropdown-item themed" href="#" id="blueberry">blueberry</a></li>
+                <li><a class="dropdown-item themed" href="#" id="alpine">alpine</a></li>
+                <li><a class="dropdown-item themed" href="#" id="botanical">botanical</a></li>
+              </ul>
             </li>
           </ul>
         </div>
       </div>
+      <!--Authentication-->
       <div class="col text-end">
-        <button type="button" class="btn themed">login</button>
+        <div class="container themed" id="auth-container">
+          <div class="dropdown">
+            <button class="btn themed" type="button" id="auth-button" data-bs-toggle="dropdown" aria-expanded="false">hi, guest</button>
+            <ul class="dropdown-menu themed">
+              <li><a class="dropdown-item themed" href="#" id="login-button">login</a></li>
+              <li><a class="dropdown-item themed" href="#" id="register-button">register</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
+    <!--Time-->
     <div class="row">
       <div class="container text-center" id="time"></div>
     </div>
+    <!--Date-->
     <div class="row">
       <div class="container text-center" id="date"></div>
     </div>
+    <!--Notepad-->
     <div class="row">
       <div class="container text-center mb-3">
         <label for="notes" class="form-label">notepad</label>

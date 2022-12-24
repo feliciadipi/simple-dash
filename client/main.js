@@ -1,11 +1,9 @@
 import * as render from './render.js';
-
 import { State } from './state.js';
 
 const timeElement = document.getElementById('time');
 const dateElement = document.getElementById('date');
 const notesElement = document.getElementById('notes');
-const themeButtons = Array.from(document.getElementsByClassName('theme'));
 const themedElements = Array.from(document.getElementsByClassName('themed'));
 const state = new State();
 
@@ -20,13 +18,23 @@ function renderTheme() {
   themedElements.forEach(e => e.classList.add(state.get('theme')));
 }
 
-function changeTheme(newTheme) {
-  let oldTheme = state.get('theme');
-  themedElements.forEach(e => e.classList.replace(oldTheme, newTheme));
-  state.set('theme', newTheme);
-}
+/* --------------------------Auth--------------------------- */
 
-/* ------------------------------------------------------ */
+const authContainer = document.getElementById('auth-container');
+
+const loginButton = document.getElementById('login-button');
+loginButton.addEventListener('click', () => {
+  render.renderLogin(authContainer);
+  renderTheme();
+});
+
+const registerButton = document.getElementById('register-button');
+registerButton.addEventListener('click', () => {
+  render.renderRegister(authContainer);
+  renderTheme();
+});
+
+/* -------------------------Themes----------------------------- */
 
 const charcoal = document.getElementById('charcoal');
 charcoal.addEventListener('click', () => {
