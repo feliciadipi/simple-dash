@@ -1,6 +1,7 @@
 import * as render from './render.js';
 import { State } from './state.js';
 
+const userElement = document.getElementById('user');
 const timeElement = document.getElementById('time');
 const dateElement = document.getElementById('date');
 const notesElement = document.getElementById('notes');
@@ -9,32 +10,24 @@ const state = new State();
 
 /* ------------------------------------------------------ */
 
-function renderPage() {
-  render.renderTime(timeElement);
-  render.renderDate(dateElement);
-}
-
 function renderTheme() {
   themedElements.forEach(e => e.classList.add(state.get('theme')));
 }
 
-/* --------------------------Auth--------------------------- */
-
-const authContainer = document.getElementById('auth-container');
-
-const loginButton = document.getElementById('login-button');
-loginButton.addEventListener('click', () => {
-  render.renderLogin(authContainer);
+function renderPage() {
+  render.renderTime(timeElement);
+  render.renderDate(dateElement);
+  
   renderTheme();
-});
+}
 
-const registerButton = document.getElementById('register-button');
-registerButton.addEventListener('click', () => {
-  render.renderRegister(authContainer);
-  renderTheme();
-});
 
-/* -------------------------Themes----------------------------- */
+
+/* -------------------------User--------------------------- */
+
+
+
+/* -------------------------Theme-------------------------- */
 
 const charcoal = document.getElementById('charcoal');
 charcoal.addEventListener('click', () => {
@@ -71,8 +64,8 @@ botanical.addEventListener('click', () => {
   themedElements.forEach(e => e.classList.replace(oldTheme, newTheme));
 });
 
-/* ------------------------------------------------------ */
+/* --------------------------Render--------------------------- */
 
-renderTheme();
 renderPage();
+render.renderLoggedOut(userElement);
 setInterval(renderPage, 1000);

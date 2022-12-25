@@ -1,8 +1,3 @@
-#body {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 18px;
-}
-
 #time {
   font-size: 72px;
   margin-top: 10vh;
@@ -15,42 +10,41 @@
   justify-content: start;
 }
 
-.charcoal {
+.charcoal, .charcoal:hover, .charcoal:active {
   background-color: #313231;
   color: #F7F5F1;
-  border-color: #ffff;
+  border-color: #F7F5F1;
 }
 
-.blueberry {
+.blueberry, .blueberry:hover {
   background-color: #6B7A8F;
   color: #b7c5d8;
-  border-color: #ffff;
+  border-color: #b7c5d8;
 }
 
-.bingsu {
+.bingsu, .bingsu:hover {
   background-color: #B8A7AA;
   color: #48373D;
-  border-color: #ffff;
+  border-color: #48373D;
 }
 
-.alpine {
+.alpine, .alpine:hover {
   background-color: #585568;
   color: #9994B8;
-  border-color: #ffff;
+  border-color: #9994B8;
 }
 
-.botanical {
+.botanical, .botanical:hover {
   background-color: #7B9C98;
   color: #EAF1F3;
-  border-color: #ffff;
+  border-color: #EAF1F3;
 }
 
 .btn {
   margin: 5%;
+  border-radius: 24px;
   box-sizing: border-box;
   display: inline-flex;
-  border-radius: 24px;
-  border-color: #ffff;
   line-height: 1;
   position: relative;
   text-align: center;
@@ -58,18 +52,15 @@
 }
 
 .btn:hover {
-  border-color: #ffff;
   border-style: dashed;
 }
 
 .btn:active {
-  border-color: #ffff;
-  border-style: dashed;
+  border-style: solid;
 }
 
-
-.dropdown-menu  li{
-  position: relative;
+.dropdown-menu  li { 
+  position: relative; 
 }
 
 .submenu{ 
@@ -79,8 +70,6 @@
   top: -12%
 }
 
-.dropdown-menu > li:hover > .submenu{ display: block; }
-
-#notes {
-  padding: 10px;
+.dropdown-menu > li:hover > .submenu { 
+  display: block; 
 }

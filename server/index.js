@@ -17,11 +17,9 @@ app.use(logger('dev'));
 app.use(expressSession(sessionConfig));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/', express.static('client'));
 auth.configure(app);
 
-/**
- * Verify that user is authenticated.
- */
 function verify(req, res, next) {
   if (req.isAuthenticated()) {
     next();
@@ -30,31 +28,21 @@ function verify(req, res, next) {
   }
 }
 
-/**
- * Log user in with passport.
- */
 app.post('/login', auth.authenticate('local', {
-  successRedirect: '/load',
+  successRedirect: '/',
   failureRedirect: '/',
 }));
 
-/**
- * Create new user entry in database.
- */
-app.post('/register', async function(req, res) {
-  const { user, pass, config } = req.body;
+app.post('/register', async (req, res) => {
+  const { user, pass } = req.body;
   try {
-    await database.createUser(user, pass, config);
-    res.sendStatus(200);
+    await database.createUser(user, pass);
+    res.redirect('/');
   } catch(e) {
     res.status(500).send(e);
   }
 });
 
-/**
- * Retrieve user settings/notes from database.
- * Required authentication.
- */
 app.get('/load', verify, async function(req, res) {
   const { user } = req.body;
   try {
@@ -65,42 +53,32 @@ app.get('/load', verify, async function(req, res) {
   }
 });
 
-/**
- * Save user settings/notes to database.
- * Required authentication.
- */
 app.post('/save', verify, async function(req, res) {
-  const { user, config } = req.body;
+  const { user, state } = req.body;
   try {
-    await database.saveState(user, config);
+    await database.saveState(user, state);
     res.sendStatus(200);
   } catch(e) {
     res.status(500).send(e);
   }
 });
 
-/**
- * Delete user settings/notes from database.
- * Required authentication.
- */
 app.post('/delete', verify, async function(req, res) {
   const { user } = req.body;
   try {
     await database.deleteUser(user);
+    res.sendStatus(200);
   } catch(e) {
     res.status(500).send(e);
   }
 });
 
-/**
- * Log the user out. Redirect to homepage.
- * TODO reset html elements on client side.
- */
 app.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
 });
 
+// TODO: remove later, just for convenience for me to reset db during dev
 app.post('/clear', async (req, res) => {
   try {
     await database.clear();
@@ -110,10 +88,6 @@ app.post('/clear', async (req, res) => {
   }
 });
 
-
-/**
- * Open server on ${port}.
- */
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
 });

@@ -16,9 +16,9 @@
 <body id="body" class="themed">
   <div class="container">
     <!--Header Row-->
-    <div class="row align-items-center">
+    <div class="row align-items-center justify-content-evenly">
       <!--Settings Menu-->
-      <div class="col-2 text-start">
+      <div class="col-8 align-content-start">
         <div class="dropdown" id="settings">
         <button class="btn themed" type="button" data-bs-toggle="dropdown" data-bs-target="#settings"
           aria-expanded="false" aria-controls="settings">settings ↓</button>
@@ -39,31 +39,23 @@
         </div>
       </div>
       <!--Authentication-->
-      <div class="col text-end">
-        <div class="container themed" id="auth-container">
-          <div class="dropdown">
-            <button class="btn themed" type="button" id="auth-button" data-bs-toggle="dropdown" aria-expanded="false">hi, guest</button>
-            <ul class="dropdown-menu themed">
-              <li><a class="dropdown-item themed" href="#" id="login-button">login</a></li>
-              <li><a class="dropdown-item themed" href="#" id="register-button">register</a></li>
-            </ul>
-          </div>
-        </div>
+      <div class="col-4 align-content-end">
+        <div class="container" id="user"></div>
       </div>
     </div>
     <!--Time-->
     <div class="row">
-      <div class="container text-center" id="time"></div>
+      <div class="container-fluid text-center mt-auto" id="time"></div>
     </div>
     <!--Date-->
     <div class="row">
-      <div class="container text-center" id="date"></div>
+      <div class="container text-center mb-auto" id="date"></div>
     </div>
     <!--Notepad-->
-    <div class="row">
-      <div class="container text-center mb-3">
+    <div class="row flex-grow-1 justify-content-center">
+      <div class="container-fluid text-center">
         <label for="notes" class="form-label">notepad</label>
-        <textarea class="form-control text-left themed" id="notes" rows="8"></textarea>
+        <textarea class="form-control text-left themed" id="notes"></textarea>
       </div>
     </div>
   </div>
