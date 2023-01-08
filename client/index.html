@@ -9,54 +9,45 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
     integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
     crossorigin="anonymous"></script>
+  <script type="module" src="clock.js" defer></script>
+  <script type="module" src="auth.js" defer></script>
   <script type="module" src="main.js" defer></script>
   <title>Timely</title>
 </head>
 
-<body id="body" class="themed">
-  <div class="container">
-    <!--Header Row-->
-    <div class="row align-items-center justify-content-evenly">
-      <!--Settings Menu-->
-      <div class="col-8 align-content-start">
-        <div class="dropdown" id="settings">
-        <button class="btn themed" type="button" data-bs-toggle="dropdown" data-bs-target="#settings"
-          aria-expanded="false" aria-controls="settings">settings ↓</button>
-          <ul class="dropdown-menu themed">
-            <li><a class="dropdown-item themed" href="#">time format</a></li>
-            <li><a class="dropdown-item themed" href="#">date format</a></li>
-            <li>
-              <a class="dropdown-item themed" href="#">theme</a>
-              <ul class="submenu dropdown-menu themed">
-                <li><a class="dropdown-item themed" href="#" id="charcoal">charcoal</a></li>
-                <li><a class="dropdown-item themed" href="#" id="bingsu">bingsu</a></li>
-                <li><a class="dropdown-item themed" href="#" id="blueberry">blueberry</a></li>
-                <li><a class="dropdown-item themed" href="#" id="alpine">alpine</a></li>
-                <li><a class="dropdown-item themed" href="#" id="botanical">botanical</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
+<body>
+  <div class="container-fluid d-flex flex-column vh-100 p-3">
+    <div class="d-inline-flex justify-content-between p-3">
+      <!--settings menu-->
+      <div class="p-3" id="settings">
+        <button class="btn" type="button" data-bs-toggle="dropdown" data-bs-target="#settings">settings ↓</button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#" id="sound-button">sound: OFF</a></li>
+          <li>
+            <a class="dropdown-item" href="#">theme</a>
+            <ul class="submenu dropdown-menu">
+              <li><a class="dropdown-item" href="#" id="charcoal">charcoal 🌑</a></li>
+              <li><a class="dropdown-item" href="#" id="bingsu">bingsu 🍧</a></li>
+              <li><a class="dropdown-item" href="#" id="blueberry">blueberry 🫐</a></li>
+              <li><a class="dropdown-item" href="#" id="alpine">alpine 🗻</a></li>
+              <li><a class="dropdown-item" href="#" id="botanical">botanical 🌱</a></li>
+            </ul>
+          </li>
+        </ul>
       </div>
-      <!--Authentication-->
-      <div class="col-4 align-content-end">
-        <div class="container" id="user"></div>
-      </div>
+      <!--authentication menu-->
+      <div class="p-3" id="auth-container"></div>
     </div>
-    <!--Time-->
-    <div class="row">
-      <div class="container-fluid text-center mt-auto" id="time"></div>
+    <div class="text-center p-3">
+      <!--mode button-->
+      <a class="m-1" href="#" id="mode-button">🕰️</a>
+      <!--clock-->
+      <div class="text-center p-1" id="clock-container"></div>
     </div>
-    <!--Date-->
-    <div class="row">
-      <div class="container text-center mb-auto" id="date"></div>
-    </div>
-    <!--Notepad-->
-    <div class="row flex-grow-1 justify-content-center">
-      <div class="container-fluid text-center">
-        <label for="notes" class="form-label">notepad</label>
-        <textarea class="form-control text-left themed" id="notes"></textarea>
-      </div>
+    <!--notepad-->
+    <div class="text-center align-content-stretch p-3">
+      <label class="form-label" for="notes-textarea">notes</label>
+      <textarea class="form-control flex-grow-1 m-3 p-3" id="notes-textarea"></textarea>
     </div>
   </div>
 </body>

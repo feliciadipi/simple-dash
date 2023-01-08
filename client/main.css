@@ -1,54 +1,48 @@
-#time {
+#time, #timer {
   font-size: 72px;
-  margin-top: 10vh;
   justify-content: end;
 }
 
-#date {
+#date, #timer-controls {
   font-size: 24px;
-  margin-bottom: 10vh;
   justify-content: start;
 }
 
-.charcoal, .charcoal:hover, .charcoal:active {
+.charcoal {
   background-color: #313231;
   color: #F7F5F1;
   border-color: #F7F5F1;
 }
 
-.blueberry, .blueberry:hover {
+.blueberry {
   background-color: #6B7A8F;
   color: #b7c5d8;
   border-color: #b7c5d8;
 }
 
-.bingsu, .bingsu:hover {
+.bingsu {
   background-color: #B8A7AA;
   color: #48373D;
   border-color: #48373D;
 }
 
-.alpine, .alpine:hover {
+.alpine {
   background-color: #585568;
   color: #9994B8;
   border-color: #9994B8;
 }
 
-.botanical, .botanical:hover {
+.botanical {
   background-color: #7B9C98;
   color: #EAF1F3;
   border-color: #EAF1F3;
 }
 
 .btn {
-  margin: 5%;
-  border-radius: 24px;
+  border-radius: 32px;
   box-sizing: border-box;
-  display: inline-flex;
-  line-height: 1;
   position: relative;
   text-align: center;
-  white-space: nowrap;
 }
 
 .btn:hover {
@@ -56,7 +50,7 @@
 }
 
 .btn:active {
-  border-style: solid;
+  border-style: dashed;
 }
 
 .dropdown-menu  li { 

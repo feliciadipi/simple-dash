@@ -1,26 +1,35 @@
-export class State {
+class State {
   constructor() {
-    this.user = undefined;
+    this.sound = false; // true: on, false: off
+    this.pomodoro = false; // true: timer, false: clock
     this.theme = 'charcoal';
-    this.use24h = false;
-    this.useMMDDYY = false;
-  }
-
-  authenticated() {
-    return (this.user !== undefined);
-  }
-
-  get(prop) {
-    return this[prop];
-  }
-
-  set(prop, val) {
-    this[prop] = val;
-    return this[prop];
+    this.notes = '';
   }
 
   toggle(prop) {
     this[prop] = !this[prop];
     return this[prop];
   }
+
+  getTheme() {
+    return this.theme;
+  }
+
+  setTheme(elements, theme) {
+    for (e of elements) {
+      e.classList.replace(this.theme, theme);
+    }
+    this.theme = theme;
+  }
+
+  getNotes() {
+    return this.notes;
+  }
+
+  setNotes(notes) {
+    this.notes = notes;
+  }
 }
+
+const state = new State();
+export default state;

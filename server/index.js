@@ -28,25 +28,22 @@ function verify(req, res, next) {
   }
 }
 
-app.post('/login', auth.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/',
-}));
+app.post('/login', auth.authenticate('local', { successRedirect: '/', failureRedirect: '/', failureMessage: true }));
 
 app.post('/register', async (req, res) => {
-  const { user, pass } = req.body;
+  const { username, password } = req.body;
   try {
-    await database.createUser(user, pass);
-    res.redirect('/');
+    console.log(req.body);
+    await database.createUser(username, password);
   } catch(e) {
+    console.log(e);
     res.status(500).send(e);
   }
 });
 
 app.get('/load', verify, async function(req, res) {
-  const { user } = req.body;
   try {
-    const data = await database.getUser(user);
+    const data = await database.getUser(req.user);
     res.status(200).json(data);
   } catch(e) {
     res.status(500).send(e);

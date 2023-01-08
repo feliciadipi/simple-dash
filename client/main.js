@@ -1,71 +1,41 @@
-import * as render from './render.js';
-import { State } from './state.js';
+import state from "./state.js"; // Singleton
 
-const userElement = document.getElementById('user');
-const timeElement = document.getElementById('time');
-const dateElement = document.getElementById('date');
-const notesElement = document.getElementById('notes');
-const themedElements = Array.from(document.getElementsByClassName('themed'));
-const state = new State();
-
-/* ------------------------------------------------------ */
-
-function renderTheme() {
-  themedElements.forEach(e => e.classList.add(state.get('theme')));
-}
-
-function renderPage() {
-  render.renderTime(timeElement);
-  render.renderDate(dateElement);
-  
-  renderTheme();
-}
-
-
-
-/* -------------------------User--------------------------- */
-
-
-
-/* -------------------------Theme-------------------------- */
+const soundButton = document.getElementById('sound-button');
+soundButton.addEventListener('click', () => {
+  const sound = state.toggle('sound');
+  if (sound) {
+    soundButton.innerText = 'sound: ON';
+  } else {
+    soundButton.innerText = 'sound: OFF';
+  }
+});
 
 const charcoal = document.getElementById('charcoal');
 charcoal.addEventListener('click', () => {
-  let oldTheme = state.get('theme');
-  let newTheme = state.set('theme', 'charcoal');
-  themedElements.forEach(e => e.classList.replace(oldTheme, newTheme));
+  state.setTheme(document.getElementsByClassName('themed'), 'charcoal');
 });
 
 const bingsu = document.getElementById('bingsu');
 bingsu.addEventListener('click', () => {
-  let oldTheme = state.get('theme');
-  let newTheme = state.set('theme', 'bingsu');
-  themedElements.forEach(e => e.classList.replace(oldTheme, newTheme));
+  state.setTheme(document.getElementsByClassName('themed'), 'bingsu');
 });
 
 const blueberry = document.getElementById('blueberry');
 blueberry.addEventListener('click', () => {
-  let oldTheme = state.get('theme');
-  let newTheme = state.set('theme', 'blueberry');
-  themedElements.forEach(e => e.classList.replace(oldTheme, newTheme));
+  state.setTheme(document.getElementsByClassName('themed'), 'blueberry');
 });
 
 const alpine = document.getElementById('alpine');
 alpine.addEventListener('click', () => {
-  let oldTheme = state.get('theme');
-  let newTheme = state.set('theme', 'alpine');
-  themedElements.forEach(e => e.classList.replace(oldTheme, newTheme));
+  state.setTheme(document.getElementsByClassName('themed'), 'alpine');
 });
 
 const botanical = document.getElementById('botanical');
 botanical.addEventListener('click', () => {
-  let oldTheme = state.get('theme');
-  let newTheme = state.set('theme', 'botanical');
-  themedElements.forEach(e => e.classList.replace(oldTheme, newTheme));
+  state.setTheme(document.getElementsByClassName('themed'), 'botanical');
 });
 
-/* --------------------------Render--------------------------- */
-
-renderPage();
-render.renderLoggedOut(userElement);
-setInterval(renderPage, 1000);
+const notesTextArea = document.getElementById('notes-textarea');
+notesTextArea.addEventListener('keyup', () => {
+  state.notes = notesTextArea.nodeValue;
+});
