@@ -5,20 +5,24 @@
     "doc": "docs"
   },
   "scripts": {
-    "start": "node server/index.js"
+    "start": "node server/index.js",
+    "sass": "node-sass client/index.scss client/index.css"
   },
   "type": "module",
   "author": "Felicia DiPietro",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^5.2.3",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-session": "^1.17.3",
     "mongodb": "^4.9.0",
     "morgan": "^1.10.0",
     "node-fetch": "^3.2.10",
+    "node-sass": "^8.0.0",
     "passport": "^0.6.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "sass": "^1.57.1"
   },
   "main": "index.js",
   "keywords": []
