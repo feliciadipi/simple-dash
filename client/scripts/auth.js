@@ -1,5 +1,3 @@
-import state from "../state.js"; // Singleton
-
 function createLink(text, f) {
   let link = document.createElement('a');
   link.href = '#';

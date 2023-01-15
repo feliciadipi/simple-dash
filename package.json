@@ -5,20 +5,20 @@
     "doc": "docs"
   },
   "scripts": {
-    "start": "node server/index.js",
-    "sass": "node-sass -w client/index.scss client/index.css"
+    "start": "node server/index.js"
   },
   "type": "module",
   "author": "Felicia DiPietro",
   "license": "ISC",
   "dependencies": {
+    "@popperjs/core": "^2.11.6",
+    "bootstrap": "^5.3.0-alpha1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-session": "^1.17.3",
     "mongodb": "^4.9.0",
     "morgan": "^1.10.0",
     "node-fetch": "^3.2.10",
-    "node-sass": "^8.0.0",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "sass": "^1.57.1"
