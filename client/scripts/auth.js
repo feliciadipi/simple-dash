@@ -1,4 +1,4 @@
-import state from "./state.js"; // Singleton
+import state from "../state.js"; // Singleton
 
 function createLink(text, f) {
   let link = document.createElement('a');
@@ -50,7 +50,7 @@ function createForm(action, method) {
 function renderGuest(element) {
   element.innerHTML = `
   <div id="guest">
-  <button class="btn" type="button" data-bs-toggle="dropdown" data-bs-target="#guest">guest ↓</button>
+  <button class="btn btn-dark" type="button" data-bs-toggle="dropdown" data-bs-target="#guest">guest ↓</button>
   <ul class="dropdown-menu">
     <li id="login"></li>
     <li id="reg"></li>

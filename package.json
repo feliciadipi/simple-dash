@@ -6,13 +6,12 @@
   },
   "scripts": {
     "start": "node server/index.js",
-    "sass": "node-sass client/index.scss client/index.css"
+    "sass": "node-sass -w client/index.scss client/index.css"
   },
   "type": "module",
   "author": "Felicia DiPietro",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^5.2.3",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-session": "^1.17.3",

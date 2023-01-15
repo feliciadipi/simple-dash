@@ -1,56 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <!--Stylesheet, extends Bootstrap SCSS, compiled from SCSS-->
-  <link href="index.css" rel="stylesheet">
-  <!--Popper-->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-  <!--Bootstrap-->
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  <!--App Scripts-->
-  <script type="module" src="clock.js" defer></script>
-  <script type="module" src="auth.js" defer></script>
-  <script type="module" src="main.js" defer></script>
-  <title>Timely</title>
-</head>
-
-<body>
-  <div class="container-fluid d-flex flex-column vh-100 p-3">
-    <div class="d-inline-flex justify-content-between p-3">
-      <!--settings menu-->
-      <div class="p-3" id="settings">
-        <button class="btn" type="button" data-bs-toggle="dropdown" data-bs-target="#settings">settings ↓</button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#" id="sound-button">sound: OFF</a></li>
-          <li>
-            <a class="dropdown-item" href="#">theme</a>
-            <ul class="submenu dropdown-menu">
-              <li><a class="dropdown-item" href="#" id="charcoal">charcoal 🌑</a></li>
-              <li><a class="dropdown-item" href="#" id="bingsu">bingsu 🍧</a></li>
-              <li><a class="dropdown-item" href="#" id="blueberry">blueberry 🫐</a></li>
-              <li><a class="dropdown-item" href="#" id="alpine">alpine 🗻</a></li>
-              <li><a class="dropdown-item" href="#" id="botanical">botanical 🌱</a></li>
-            </ul>
-          </li>
-        </ul>
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8">
+    <title>Timely</title>
+    <link href="styles.css" rel="stylesheet">
+    <script type="module" src="client/clock.js" defer></script>
+    <script type="module" src="client/auth.js" defer></script>
+    <script type="module" src="client/main.js" defer></script>
+  </head>
+  <body>
+    <div class="container-fluid d-flex flex-column vh-100 p-3">
+      <div class="d-inline-flex justify-content-between p-3">
+        <!--settings menu-->
+        <div class="p-3" id="settings">
+          <button class="btn btn-dark" type="button" data-bs-toggle="dropdown" data-bs-target="#settings">settings ↓</button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#" id="sound-button">sound: OFF</a></li>
+            <li>
+              <a class="dropdown-item" href="#">theme</a>
+              <ul class="submenu dropdown-menu">
+                <li><a class="dropdown-item" href="#" id="charcoal">charcoal 🌑</a></li>
+                <li><a class="dropdown-item" href="#" id="bingsu">bingsu 🍧</a></li>
+                <li><a class="dropdown-item" href="#" id="blueberry">blueberry 🫐</a></li>
+                <li><a class="dropdown-item" href="#" id="alpine">alpine 🗻</a></li>
+                <li><a class="dropdown-item" href="#" id="botanical">botanical 🌱</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!--authentication menu-->
+        <div class="p-3" id="auth-container"></div>
       </div>
-      <!--authentication menu-->
-      <div class="p-3" id="auth-container"></div>
+      <div class="text-center p-3">
+        <!--mode button-->
+        <a class="m-1" href="#" id="mode-button">🕰️</a>
+        <!--clock-->
+        <div class="text-center p-1" id="clock-container"></div>
+      </div>
+      <!--notepad-->
+      <div class="text-center align-content-stretch p-3">
+        <label class="form-label" for="notes-textarea">notes</label>
+        <textarea class="form-control flex-grow-1 m-3 p-3" id="notes-textarea"></textarea>
+      </div>
     </div>
-    <div class="text-center p-3">
-      <!--mode button-->
-      <a class="m-1" href="#" id="mode-button">🕰️</a>
-      <!--clock-->
-      <div class="text-center p-1" id="clock-container"></div>
-    </div>
-    <!--notepad-->
-    <div class="text-center align-content-stretch p-3">
-      <label class="form-label" for="notes-textarea">notes</label>
-      <textarea class="form-control flex-grow-1 m-3 p-3" id="notes-textarea"></textarea>
-    </div>
-  </div>
-</body>
-
+  </body>
 </html>
