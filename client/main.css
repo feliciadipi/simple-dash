@@ -8,49 +8,11 @@
   justify-content: start;
 }
 
-.charcoal {
-  background-color: #313231;
-  color: #F7F5F1;
-  border-color: #F7F5F1;
-}
-
-.blueberry {
-  background-color: #6B7A8F;
-  color: #b7c5d8;
-  border-color: #b7c5d8;
-}
-
-.bingsu {
-  background-color: #B8A7AA;
-  color: #48373D;
-  border-color: #48373D;
-}
-
-.alpine {
-  background-color: #585568;
-  color: #9994B8;
-  border-color: #9994B8;
-}
-
-.botanical {
-  background-color: #7B9C98;
-  color: #EAF1F3;
-  border-color: #EAF1F3;
-}
-
 .btn {
   border-radius: 32px;
   box-sizing: border-box;
   position: relative;
   text-align: center;
-}
-
-.btn:hover {
-  border-style: dashed;
-}
-
-.btn:active {
-  border-style: dashed;
 }
 
 .dropdown-menu  li { 
@@ -61,7 +23,7 @@
   display: none;
   position: absolute;
   left: 100%;
-  top: -12%
+  top: -10%
 }
 
 .dropdown-menu > li:hover > .submenu { 

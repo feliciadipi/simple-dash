@@ -1,1 +1,5 @@
 # Milestone 3
+
+## SASS
+
+My original implementing the app's themes became more complicated when I decided to use Boostrap for my UI components, so I decided to explore a compatible solution instead of scrapping the feature altogether. After some research, it seemed that learning how to use SASS would produce the most production-level codebase. This meant getting a little deeper into front-end development skills that I originally imagined, but it was an interesting journey nonetheless. It was time-consuming and confusing at first, but totally worth it in the end––"syntactically awesome stylesheets" really earn their name, they are awesome! To implement the themes, I essentially extended Bootstrap's CSS distribution. To avoid directly changing the code (installed by NPM), I created by own SCSS file that overrides Bootstrap's default color maps before importing their stylesheets. The SCSS needs to be compiled to normal CSS for use in the HTML, so I added a simple to the package.json that does this using the node-sass package. I run it with manually with the command $npm run sass.

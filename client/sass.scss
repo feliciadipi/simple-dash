@@ -1,0 +1,54 @@
+// Import Bootstrap SCSS
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+// Custom theme colors
+$charcoal: #6c757d !default;
+$charcoal-bg: #2f3439 !default;
+
+$blueberry: #b7c5d8 !default;
+$blueberry-bg: #6b7a8f !default;
+
+$alpine: #9994B8 !default;
+$alpine-bg: #585568 !default;
+
+$bingsu: #48373D !default;
+$bingsu-bg: #B8A7AA !default;
+
+// Custom scss mixin, abstraction for applying a theme
+@mixin apply-theme($name, $color, $bg){
+  @include color-mode($name) {
+    --#{$prefix}body-color: #{$color};
+    --#{$prefix}body-bg: #{$bg};
+    --#{$prefix}border-color: #{lighten($bg, 10%)};
+    --#{$prefix}link-color: #{darken($bg, 10%)};
+    
+    .lnk {
+      color: #{darken($bg, 20%)};
+    }
+  
+    .btn {
+      --#{$prefix}btn-color: #{$color};
+      --#{$prefix}btn-bg: #{darken($bg, 8%)};
+      --#{$prefix}btn-hover-bg: #{darken($bg, 15%)};
+      --#{$prefix}btn-active-bg: #{darken($bg, 15%)};
+      --#{$prefix}btn-active-border-color: transparent;
+    }
+  
+    .dropdown-menu {
+      --#{$prefix}dropdown-color: #{$color};
+      --#{$prefix}dropdown-bg: #{darken($bg, 10%)};
+      --#{$prefix}dropdown-link-hover-bg: #{darken($bg, 15%)};
+      --#{$prefix}dropdown-link-active-bg: #{darken($bg, 15%)};
+    }
+
+    .dropdown-item {
+      color: #{$color};
+    }
+  }
+}
+
+// Apply defined themes
+@include apply-theme("charcoal", $charcoal, $charcoal-bg);
+@include apply-theme("bingsu", $bingsu, $bingsu-bg);
+@include apply-theme("blueberry", $blueberry, $blueberry-bg);
+@include apply-theme("alpine", $alpine, $alpine-bg);
