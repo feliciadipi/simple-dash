@@ -1,14 +1,20 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-bs-theme="charcoal">
   <head>
     <meta charset="UTF-8">
+    <!--dynamic sizing across devices-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
+    <!--compiled bootstrap scss with customization-->
+    <link rel="stylesheet" href="sass.css">
+    <!--custom (plain) css-->
     <link rel="stylesheet" href="main.css">
+    <!--bootstrap js-->
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
+    <!--scripts-->
     <script type="module" src="scripts/clock.js" defer></script>
     <script type="module" src="scripts/main.js" defer></script>
     <script type="module" src="scripts/auth.js" defer></script>
+    <script type="module" src="scripts/theme.js" defer></script>
     <title>timely.io</title>
   </head>
   <body>
@@ -16,17 +22,16 @@
       <div class="d-inline-flex justify-content-between p-3">
         <!--settings menu-->
         <div class="p-3" id="settings">
-          <button class="btn btn-dark" type="button" data-bs-toggle="dropdown" data-bs-target="#settings">settings ↓</button>
+          <button class="btn" type="button" data-bs-toggle="dropdown" data-bs-target="#settings">settings ↓</button>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#" id="sound-button">sound: OFF</a></li>
             <li>
               <a class="dropdown-item" href="#">theme</a>
               <ul class="submenu dropdown-menu">
-                <li><a class="dropdown-item" href="#" id="charcoal">charcoal 🌑</a></li>
-                <li><a class="dropdown-item" href="#" id="bingsu">bingsu 🍧</a></li>
-                <li><a class="dropdown-item" href="#" id="blueberry">blueberry 🫐</a></li>
-                <li><a class="dropdown-item" href="#" id="alpine">alpine 🗻</a></li>
-                <li><a class="dropdown-item" href="#" id="botanical">botanical 🌱</a></li>
+                <li><a class="dropdown-item" href="#" data-bs-theme-value="charcoal" id="charcoal">charcoal 🌑</a></li>
+                <li><a class="dropdown-item" href="#" data-bs-theme-value="bingsu" id="bingsu">bingsu 🍧</a></li>
+                <li><a class="dropdown-item" href="#" data-bs-theme-value="blueberry" id="blueberry">blueberry 🫐</a></li>
+                <li><a class="dropdown-item" href="#" data-bs-theme-value="alpine" id="alpine">alpine 🗻</a></li>
               </ul>
             </li>
           </ul>
@@ -36,7 +41,7 @@
       </div>
       <div class="text-center p-3">
         <!--mode button-->
-        <a class="m-1" href="#" id="mode-button">🕰️</a>
+        <button class="btn m-1" id="mode-button">Clock 🕰️</button>
         <!--clock-->
         <div class="text-center p-1" id="clock-container"></div>
       </div>

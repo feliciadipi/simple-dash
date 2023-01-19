@@ -69,10 +69,10 @@ const modeButton = document.getElementById('mode-button');
 modeButton.addEventListener('click', () => {
   const mode = state.toggle('pomodoro');
   if (mode) {
-    modeButton.innerText = '⏳';
+    modeButton.innerText = 'Timer ⏳';
     renderTimer(clockContainer);
   } else {
-    modeButton.innerText = '🕰️';
+    modeButton.innerText = 'Clock 🕰️';
     startClock(clockContainer);
   }
 });

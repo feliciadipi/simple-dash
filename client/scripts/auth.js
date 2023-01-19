@@ -2,7 +2,7 @@ function createLink(text, f) {
   let link = document.createElement('a');
   link.href = '#';
   link.innerText = text;
-  link.classList.add('p-1');
+  link.classList.add('p-1', 'lnk');
   link.addEventListener('click', () => f());
   return link;
 }
@@ -10,7 +10,7 @@ function createLink(text, f) {
 function createNav(l1, l2) {
   let divider = document.createElement('div');
   divider.innerText = '|';
-  divider.classList.add('p-1');
+  divider.classList.add('p-1', 'lnk');
 
   let nav = document.createElement('div');
   nav.classList.add('d-flex', 'flex-row', 'justify-content-end');
@@ -37,7 +37,7 @@ function createForm(action, method) {
   let submitButton = document.createElement('button');
   submitButton.type = 'submit';
   submitButton.innerText = 'submit';
-  submitButton.classList.add('btn', 'btn-outline-primary', 'm-2');
+  submitButton.classList.add('btn', 'm-2');
   // TODO submit button should also render authenticated if successful
   // call restore()
 
@@ -48,7 +48,7 @@ function createForm(action, method) {
 function renderGuest(element) {
   element.innerHTML = `
   <div id="guest">
-  <button class="btn btn-dark" type="button" data-bs-toggle="dropdown" data-bs-target="#guest">guest ↓</button>
+  <button class="btn" data-bs-toggle="dropdown" data-bs-target="#guest">guest ↓</button>
   <ul class="dropdown-menu">
     <li id="login"></li>
     <li id="reg"></li>
