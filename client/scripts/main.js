@@ -1,4 +1,22 @@
-import state from "./state.js"; // Singleton
+import state from "./state.js";
+import startClock from "./clock.js"
+import renderTimer from "./timer.js"
+
+const clockTimerContainer = document.getElementById('clock-timer-container');
+startClock(clockTimerContainer);
+
+const modeButton = document.getElementById('mode-button');
+modeButton.addEventListener('click', () => {
+  const mode = state.toggle('mode');
+  if (mode) { // true = timer mode
+    modeButton.innerText = 'timer ⏳';
+    renderTimer(clockTimerContainer);
+  } else { // false = clock mode
+    modeButton.innerText = 'clock 🕰️';
+    startClock(clockTimerContainer);
+  }
+});
+
 
 const soundButton = document.getElementById('sound-button');
 soundButton.addEventListener('click', () => {
@@ -8,34 +26,4 @@ soundButton.addEventListener('click', () => {
   } else {
     soundButton.innerText = 'sound: OFF';
   }
-});
-
-const charcoal = document.getElementById('charcoal');
-charcoal.addEventListener('click', () => {
-  state.setTheme(document.getElementsByClassName('themed'), 'charcoal');
-});
-
-const bingsu = document.getElementById('bingsu');
-bingsu.addEventListener('click', () => {
-  state.setTheme(document.getElementsByClassName('themed'), 'bingsu');
-});
-
-const blueberry = document.getElementById('blueberry');
-blueberry.addEventListener('click', () => {
-  state.setTheme(document.getElementsByClassName('themed'), 'blueberry');
-});
-
-const alpine = document.getElementById('alpine');
-alpine.addEventListener('click', () => {
-  state.setTheme(document.getElementsByClassName('themed'), 'alpine');
-});
-
-const botanical = document.getElementById('botanical');
-botanical.addEventListener('click', () => {
-  state.setTheme(document.getElementsByClassName('themed'), 'botanical');
-});
-
-const notesTextArea = document.getElementById('notes-textarea');
-notesTextArea.addEventListener('keyup', () => {
-  state.notes = notesTextArea.nodeValue;
 });
