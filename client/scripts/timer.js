@@ -50,6 +50,8 @@ function renderCountdown(element, duration) {
   timer.classList.add('mt-5');
   timer.innerText = duration+':00';
 
+  const t = new Timer(timer);
+
   // div: container for controls/buttons
   const controls = document.createElement('div');
   controls.id = 'timer-controls';
@@ -94,6 +96,9 @@ function renderCountdown(element, duration) {
   // append time and controls to document
   element.appendChild(timer);
   element.appendChild(controls);
+
+  // start the timer
+  t.start(duration);
 }
 
 function renderTimer(element) {
