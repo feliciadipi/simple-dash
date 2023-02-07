@@ -48,17 +48,76 @@ class Timer {
 function renderInput(element) {
   element.innerHTML = '';
 
-  let input = document.createElement('input');
-  input.type = 'text';
-  input.placeholder = '20:00';
-  input.classList.add('form-control', 'm-2');
+  // container = flex
+  // row 1 = button group (disable active button)
+  // row 2 = time
+  // row 3 = start button
+  const container = document.createElement('div');
+  container.classList.add('d-inline-flex', 'card', 'w-50', 'position-absolute', 'translate-middle');
 
-  let btn = document.createElement('button');
-  btn.classList.add('btn');
-  btn.addEventListener('click', () => {
-    let duration = input.value;
-    renderCountdown(element, duration);
+  const r1 = document.createElement('div');
+  r1.classList.add('p-3', 'btn-group');
+
+  const r2 = document.createElement('div');
+  r2.classList.add('d-inline-flex', 'p-3');
+
+  const r3 = document.createElement('div');
+  r3.classList.add('p-3');
+
+  const pomo = document.createElement('div');
+  pomo.classList.add('btn', 'disabled');
+  pomo.innerText = 'pomodoro';
+
+  const short = document.createElement('div');
+  short.classList.add('btn');
+  short.innerText = 'short break';
+
+  const long = document.createElement('div');
+  long.classList.add('btn');
+  long.innerText = 'long break';
+
+  let actv = pomo;
+
+  pomo.addEventListener('click', () => {
+    pomo.classList.add('disabled');
+    actv.classList.remove('disabled');
+    actv = pomo;
   });
+
+  short.addEventListener('click', () => {
+    short.classList.add('disabled');
+    actv.classList.remove('disabled');
+    actv = short;
+  });
+
+  long.addEventListener('click', () => {
+    long.classList.add('disabled');
+    actv.classList.remove('disabled');
+    actv = long;
+  });
+
+  r1.append(pomo, short, long);
+
+  const time = document.createElement('input');
+  time.classList.add('card', 'w-50','position-relative', 'start-50', 'translate-middle-x');
+  time.style.height = '100px';
+  time.style.borderWidth = '0px';
+  time.style.fontSize = '84px';
+  time.style.textAlign = 'center';
+  time.placeholder = '00:00';
+  r2.append(time);
+
+  const startBtn = document.createElement('button');
+  startBtn.classList.add('btn');
+  startBtn.innerText = 'start';
+  startBtn.addEventListener('click', () => {
+    let dur = time.value;
+    renderCountdown(element, dur);
+  });
+  r3.append(startBtn);
+
+  container.append(r1, r2, r3);
+  element.append(container);
 }
 
 /*---------- Countdown View ----------*/
@@ -66,16 +125,16 @@ function renderInput(element) {
 function renderCountdown(element, duration) {
   element.innerHTML = '';
   
-  // timer div: displays remaining time in (mm:ss) format
+  // timer container
   const timer = document.createElement('div');
   timer.id = 'timer';
   timer.classList.add('mt-5');
   timer.innerText = duration+':00';
 
-  // timer object: manages timer operations and countdown
+  // timer object
   const t = new Timer(timer, duration);
 
-  // constrols div: flex container for buttons
+  // controls container
   const controls = document.createElement('div');
   controls.id = 'timer-controls';
   controls.classList.add('d-inline-flex', 'flex-row', 'justify-content-center', 'mb-3');
@@ -87,7 +146,6 @@ function renderCountdown(element, duration) {
   playButton.href = '#';
   playButton.innerText = '▶';
   controls.appendChild(playButton);
-
   playButton.addEventListener('click', () => {
     t.start();
   });
@@ -99,7 +157,6 @@ function renderCountdown(element, duration) {
   pauseButton.href = '#';
   pauseButton.innerHTML = 'I I';
   controls.appendChild(pauseButton);
-
   pauseButton.addEventListener('click', () => {
     t.pause();
   });
@@ -111,22 +168,25 @@ function renderCountdown(element, duration) {
   resetButton.href = '#';
   resetButton.innerText = '↺';
   controls.appendChild(resetButton);
-
-  // cancels the running timer and brings up menu again
   resetButton.addEventListener('click', () => {
     t.pause();
     renderInput(element);
   });
 
-  // append divs to document, start timer
-  element.appendChild(timer);
-  element.appendChild(controls);
-  t.start();
+  // DOM surgery
+  element.append(timer, controls);
+  if (duration > 0) {
+    t.start();
+  } else {
+    timer.innerText = '00:00';
+  }
 }
+
+/*---------- Export Function ----------*/
 
 function renderTimer(element) {
   element.innerHTML = '';
-  renderCountdown(element, 1);
+  renderInput(element);
 }
 
 export default renderTimer;

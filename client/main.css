@@ -1,11 +1,9 @@
 #time, #timer {
-  font-size: 72px;
-  justify-content: end;
+  font-size: 84px;
 }
 
 #date, #timer-controls {
   font-size: 24px;
-  justify-content: start;
 }
 
 .btn {

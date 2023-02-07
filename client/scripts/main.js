@@ -5,18 +5,20 @@ import renderTimer from "./timer.js"
 const clockTimerContainer = document.getElementById('clock-timer-container');
 startClock(clockTimerContainer);
 
-const modeButton = document.getElementById('mode-button');
-modeButton.addEventListener('click', () => {
-  const mode = state.toggle('mode');
-  if (mode) { // true = timer mode
-    modeButton.innerText = 'timer ⏳';
-    renderTimer(clockTimerContainer);
-  } else { // false = clock mode
-    modeButton.innerText = 'clock 🕰️';
-    startClock(clockTimerContainer);
-  }
+const clockModeButton = document.getElementById('clock-mode-button');
+const timerModeButton = document.getElementById('timer-mode-button');
+
+clockModeButton.addEventListener('click', () => {
+  timerModeButton.classList.remove('disabled');
+  clockModeButton.classList.add('disabled');
+  startClock(clockTimerContainer);
 });
 
+timerModeButton.addEventListener('click', () => {
+  clockModeButton.classList.remove('disabled');
+  timerModeButton.classList.add('disabled');
+  renderTimer(clockTimerContainer);
+});
 
 const soundButton = document.getElementById('sound-button');
 soundButton.addEventListener('click', () => {

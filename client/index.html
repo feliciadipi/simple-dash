@@ -17,7 +17,8 @@
     <title>timely.io</title>
   </head>
   <body>
-    <div class="container-fluid d-flex flex-column vh-100 p-3">
+    <div class="container-fluid d-flex flex-column justify-content-between text-center vh-100 p-3">
+      <!--navbar section-->
       <div class="d-inline-flex justify-content-between p-3">
         <!--settings menu-->
         <div class="p-3" id="settings">
@@ -35,19 +36,24 @@
             </li>
           </ul>
         </div>
+        <!--mode button/toggle-->
+        <div class="p-3 btn-group"> 
+          <button class="btn disabled" id="clock-mode-button">clock</button>
+          <button class="btn" id="timer-mode-button">timer</button>
+        </div>
         <!--authentication menu-->
         <div class="p-3" id="auth-container"></div>
       </div>
-      <div class="text-center p-3">
-        <!--mode button-->
-        <button class="btn m-1" id="mode-button">clock 🕰️</button>
-        <!--clock-->
-        <div class="text-center p-1" id="clock-timer-container"></div>
+      <!--clock section-->
+      <div class="p-3">
+        <div>
+          <div class="text-center p-1" id="clock-timer-container"></div>
+        </div>
       </div>
-      <!--notepad-->
-      <div class="text-center align-content-stretch p-3">
-        <label class="form-label" for="notes-textarea">notes</label>
-        <textarea class="form-control flex-grow-1 m-3 p-3" id="notes-textarea"></textarea>
+      <!--notes section-->
+      <div class="d-flex flex-column text-center p-3">
+        <div class="p-3">notes</div>
+        <textarea class="form-control p-3" id="notes-textarea"></textarea>
       </div>
     </div>
   </body>
