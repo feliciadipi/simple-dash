@@ -1,49 +1,5 @@
-function createLink(text, f) {
-  let link = document.createElement('a');
-  link.href = '#';
-  link.innerText = text;
-  link.classList.add('p-1', 'lnk');
-  link.addEventListener('click', () => f());
-  return link;
-}
-
-function createNav(l1, l2) {
-  let divider = document.createElement('div');
-  divider.innerText = '|';
-  divider.classList.add('p-1', 'lnk');
-
-  let nav = document.createElement('div');
-  nav.classList.add('d-flex', 'flex-row', 'justify-content-end');
-  nav.append(l1, divider, l2);
-  return nav;
-}
-
-function createForm(action, method) {
-  let form = document.createElement('form');
-  form.classList.add('text-end');
-  form.action = action;
-  form.method = method;
-
-  let userInput = document.createElement('input');
-  userInput.type = 'text';
-  userInput.placeholder = 'username';
-  userInput.classList.add('form-control', 'm-2');
-
-  let passInput = document.createElement('input');
-  passInput.type = 'text';
-  passInput.placeholder = 'password';
-  passInput.classList.add('form-control', 'm-2');
-
-  let submitButton = document.createElement('button');
-  submitButton.type = 'submit';
-  submitButton.innerText = 'submit';
-  submitButton.classList.add('btn', 'm-2');
-  // TODO submit button should also render authenticated if successful
-  // call restore()
-
-  form.append(userInput, passInput, submitButton);
-  return form;
-}
+import {createLink, createNav, createForm} from './util.js';
+import state from "./state.js";
 
 function renderGuest(element) {
   element.innerHTML = `
@@ -61,7 +17,6 @@ function renderGuest(element) {
   document.getElementById('login').append(login);
   document.getElementById('reg').append(reg);
 }
-
 
 function renderLogin(element) {
   element.innerHTML = '';
@@ -83,20 +38,13 @@ function renderRegister(element) {
 
 function renderAuthenticated(element) {
   element.innerHTML = '';
-  let logoutButton = createLink('log out', () => renderGuest(element));
+  let logoutButton = createLink('log out', () => {
+
+    renderGuest(element)
+  });
   logoutButton.classList.add('btn');
   element.append(logoutButton);
   // TODO send /logout route request and reset() if successful
-}
-
-// TODO
-function init() {
-
-}
-
-// TODO
-function reset() {
-
 }
 
 // TODO

@@ -22,7 +22,8 @@ timerModeButton.addEventListener('click', () => {
 
 const soundButton = document.getElementById('sound-button');
 soundButton.addEventListener('click', () => {
-  const sound = state.toggle('sound');
+  const sound = state.toggle('sound'); //todo save settings updates to db
+  window.localStorage['sound'] = sound;
   if (sound) {
     soundButton.innerText = 'sound: ON';
   } else {

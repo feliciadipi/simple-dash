@@ -2,13 +2,13 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 
 // Custom theme colors
-$charcoal: #6c757d !default;
+$charcoal: #90989f !default;
 $charcoal-bg: #2f3439 !default;
 
-$blueberry: #b7c5d8 !default;
+$blueberry: #c3cfe0 !default;
 $blueberry-bg: #6b7a8f !default;
 
-$alpine: #9994B8 !default;
+$alpine: #aeaac9 !default;
 $alpine-bg: #585568 !default;
 
 $bingsu: #48373D !default;
@@ -23,7 +23,7 @@ $bingsu-bg: #B8A7AA !default;
     --#{$prefix}link-color: #{darken($bg, 10%)};
     
     .lnk {
-      color: #{darken($bg, 20%)};
+      color: #{$color};
     }
   
     .btn {
@@ -42,6 +42,10 @@ $bingsu-bg: #B8A7AA !default;
     }
 
     .dropdown-item {
+      color: #{$color};
+    }
+
+    ::placeholder {
       color: #{$color};
     }
   }

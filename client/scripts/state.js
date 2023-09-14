@@ -2,6 +2,7 @@ class State {
   constructor() {
     this.sound = false; // true: on, false: off
     this.mode = false; // true: timer, false: clock
+    this.auth = false;
   }
 
   toggle(prop) {
