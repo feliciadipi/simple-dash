@@ -1,3 +1,5 @@
+/* -------------------- Setup -------------------- */
+
 import 'dotenv/config';
 import express from 'express';
 import expressSession from 'express-session';
@@ -20,63 +22,60 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', express.static('client'));
 auth.configure(app);
 
-function verify(req, res, next) {
-  if (req.isAuthenticated()) {
-    next();
-  } else {
-    res.redirect('/');
-  }
-}
+await database.connect();
 
-app.post('/login', auth.authenticate('local', { successRedirect: '/', failureRedirect: '/', failureMessage: true }));
+/* -------------------- Routes -------------------- */
 
-app.post('/register', async (req, res) => {
-  const { username, password } = req.body;
+app.get('/login', auth.authenticate('local', { failureMessage: true }), async (req, res) => {
+  res.status(200).send(req.user);
+});
+
+app.get('/logout', checkAuth, function(req, res) {
+  req.logout((err) => { if (err) { throw new Error(err.toString()); }});
+  res.sendStatus(200);
+});
+
+app.post('/register', async function(req, res) {
   try {
-    console.log(req.body);
-    await database.createUser(username, password);
+    await database.createUser(req.body);
+    req.login(req.body, err => { if (err) { throw new Error(err.toString()); }});
+    res.sendStatus(200);
   } catch(e) {
-    console.log(e);
-    res.status(500).send(e);
+    res.status(500).send(e.toString());
   }
 });
 
-app.get('/load', verify, async function(req, res) {
+app.get('/load', checkAuth, async function(req, res) {
   try {
-    const data = await database.getUser(req.user);
+    const data = await database.getUser(req.user.username);
     res.status(200).json(data);
   } catch(e) {
     res.status(500).send(e);
   }
 });
 
-app.post('/save', verify, async function(req, res) {
-  const { user, state } = req.body;
+app.post('/update', checkAuth, async function(req, res) {
+  const settings = req.body;
   try {
-    await database.saveState(user, state);
+    await database.updateUser(req.user.username, settings);
     res.sendStatus(200);
   } catch(e) {
-    res.status(500).send(e);
+    res.status(500).send(e.toString());
   }
 });
 
-app.post('/delete', verify, async function(req, res) {
-  const { user } = req.body;
+app.post('/delete', checkAuth, async function(req, res) {
   try {
-    await database.deleteUser(user);
+    await database.deleteUser(req.user.username);
+    req.logout((err) => { if (err) { throw new Error(err.toString()); }});
     res.sendStatus(200);
   } catch(e) {
-    res.status(500).send(e);
+    res.status(500).send(e.toString());
   }
-});
-
-app.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/');
 });
 
 // TODO: remove later, just for convenience for me to reset db during dev
-app.post('/clear', async (req, res) => {
+app.get('/clear', async (req, res) => {
   try {
     await database.clear();
     res.sendStatus(200);
@@ -85,6 +84,25 @@ app.post('/clear', async (req, res) => {
   }
 });
 
+/* -------------------- ETC... -------------------- */
+
+// Authentication middleware
+function checkAuth(req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.status(404).send("Authentication required.");
+  }
+}
+
+// Signal handler (closes DB connection)
+process.on('SIGINT' || 'SIGTERM', async () => {
+  await database.client.close();
+  console.log("\nGoodbye!");
+  process.exit(0);
+});
+
+// Start server
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
 });

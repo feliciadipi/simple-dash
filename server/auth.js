@@ -4,18 +4,21 @@ import database from './database.js';
 
 const { Strategy } = passportLocal;
 
-const strategy = new Strategy(async function(user, pass, done) {
-  if (!await database.userExists(user)) {
-    return done(null, false, { message: 'User does not exist.' });
+const strategy = new Strategy(async function(username, password, done){ // "verify" function
+  const data = await database.getUser(username);
+  if (!data) {
+    return done(null, false, { message: 'Incorrect username' });
   }
-  if (!await database.validatePassword(user, pass)) {
+  if (data.password !== password) {
     // should disable logins after N messages
     // delay return to rate-limit brute-force attacks
     await new Promise((r) => setTimeout(r, 2000)); // two second delay
-    return done(null, false, { message: 'Incorect password' });
+    return done(null, false, { message: 'Incorrect password' });
   }
+  // done is a parameter to the closure that calling this will return
+  // it is defined when you call the closure and pass it a function as an argument
+  // it should have the form (err, user, info) => {}
   // success: return user data
-  const data = await database.getUser(user);
   return done(null, data);
 });
 

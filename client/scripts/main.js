@@ -1,10 +1,9 @@
 import state from "./state.js";
-import startClock from "./clock.js"
-import renderTimer from "./timer.js"
+import startClock from "./clock.js";
+import renderTimer from "./timer.js";
 
+/* CLOCK/TIMER */
 const clockTimerContainer = document.getElementById('clock-timer-container');
-startClock(clockTimerContainer);
-
 const clockModeButton = document.getElementById('clock-mode-button');
 const timerModeButton = document.getElementById('timer-mode-button');
 
@@ -20,13 +19,26 @@ timerModeButton.addEventListener('click', () => {
   renderTimer(clockTimerContainer);
 });
 
+startClock(clockTimerContainer);
+
+/* SOUND BUTTON */
 const soundButton = document.getElementById('sound-button');
 soundButton.addEventListener('click', () => {
-  const sound = state.toggle('sound'); //todo save settings updates to db
-  window.localStorage['sound'] = sound;
+  const sound = state.toggle('sound');
   if (sound) {
     soundButton.innerText = 'sound: ON';
   } else {
     soundButton.innerText = 'sound: OFF';
   }
 });
+
+/* THEME HANDLER | Adapted from Bootstrap Docs https://getbootstrap.com/docs/5.3/customize/color-modes/#how-it-works */
+(() => {
+  document.querySelectorAll('[data-bs-theme-value]').forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      const theme = toggle.getAttribute('data-bs-theme-value');
+      document.documentElement.setAttribute('data-bs-theme', theme);
+      state.set('theme', theme);
+    });
+  });
+})();
