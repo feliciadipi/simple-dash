@@ -26,8 +26,12 @@ await database.connect();
 
 /* -------------------- Routes -------------------- */
 
-app.get('/login', auth.authenticate('local', { failureMessage: true }), async (req, res) => {
-  res.status(200).send(req.user);
+app.post('/login', auth.authenticate('local', { failureMessage: true }), async (req, res) => {
+  const data = {
+    "username": req.user["username"],
+    "settings": req.user["settings"]
+  };
+  res.status(200).json(data);
 });
 
 app.get('/logout', checkAuth, function(req, res) {
@@ -56,6 +60,7 @@ app.get('/load', checkAuth, async function(req, res) {
 
 app.post('/update', checkAuth, async function(req, res) {
   const settings = req.body;
+  console.log(settings);
   try {
     await database.updateUser(req.user.username, settings);
     res.sendStatus(200);

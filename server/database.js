@@ -31,7 +31,7 @@ class Database {
 
   async updateUser(username, settings) {
     const users = this.client.db('timely').collection('users');
-    const result = await users.updateOne({username: username}, {$set: {settings: settings}});
+    const result = await users.updateOne({username: username}, {$set: {"settings": settings}});
     console.log(`${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`);
   }
 

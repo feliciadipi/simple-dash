@@ -4,7 +4,7 @@ import database from './database.js';
 
 const { Strategy } = passportLocal;
 
-const strategy = new Strategy(async function(username, password, done){ // "verify" function
+const strategy = new Strategy(async function(username, password, done){ // anon is "verify" function
   const data = await database.getUser(username);
   if (!data) {
     return done(null, false, { message: 'Incorrect username' });

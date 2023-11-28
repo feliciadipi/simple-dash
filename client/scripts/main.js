@@ -1,8 +1,13 @@
 import state from "./state.js";
 import startClock from "./clock.js";
 import renderTimer from "./timer.js";
+import * as authViews from "./auth-views.js";
 
-/* CLOCK/TIMER */
+/* ----- AUTHENTICATION WINDOW ----- */
+const authContainer = document.getElementById('auth-container');
+authViews.renderGuest(authContainer);
+
+/* ----- CLOCK/TIMER ----- */
 const clockTimerContainer = document.getElementById('clock-timer-container');
 const clockModeButton = document.getElementById('clock-mode-button');
 const timerModeButton = document.getElementById('timer-mode-button');
@@ -21,7 +26,7 @@ timerModeButton.addEventListener('click', () => {
 
 startClock(clockTimerContainer);
 
-/* SOUND BUTTON */
+/* ----- SOUND BUTTON ----- */
 const soundButton = document.getElementById('sound-button');
 soundButton.addEventListener('click', () => {
   const sound = state.toggle('sound');
